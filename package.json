@@ -1,0 +1,14 @@
+{
+  "name": "auto-login-cf",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "bopzor",
+  "license": "Beerware",
+  "private": false,
+  "scripts": {
+    "start": "cypress run"
+  },
+  "dependencies": {
+    "cypress": "^6.4.0"
+  }
+}
