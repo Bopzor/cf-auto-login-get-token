@@ -21,9 +21,22 @@ describe('Login', () => {
 
         const token = parsed.access_token;
 
+        cy.readFile(Cypress.env('ENV_PATH')).then((data) => {
+          let lines = data.split('\n');
 
-        cy.writeFile(Cypress.env('ENV_PATH'), `JWT=${token}`, { flag: 'a' });
+          const JWTIdx = lines.findIndex((line) => line.startsWith('JWT='));
+          const idx = JWTIdx >= 0 ? JWTIdx : 0;
+
+          lines.splice(idx, 1);
+          if (lines[lines.length - 1] !== '') {
+            lines.push('');
+          }
+
+          lines.push(`JWT=${token}`, '');
+
+          cy.writeFile(Cypress.env('ENV_PATH'), lines.join('\n'));
+        })
       })
     })
   });
-})
+});
